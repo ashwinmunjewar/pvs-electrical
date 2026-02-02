@@ -128,6 +128,38 @@ This will start the development server at [http://localhost:3000](http://localho
 - Form submission is handled with a client-side handler (can be connected to backend API)
 - The site uses the exact fonts, colors, and styling from the original
 
+## Deployment to GitHub Pages
+
+This project is configured for automatic deployment to GitHub Pages.
+
+### Automatic Deployment
+
+1. **Enable GitHub Pages:**
+   - Go to your repository settings on GitHub
+   - Navigate to "Pages" in the left sidebar
+   - Under "Source", select "GitHub Actions"
+   - The site will automatically deploy when you push to the `main` branch
+
+2. **Your site will be available at:**
+   - `https://ashwinmunjewar.github.io/pvs-electrical/`
+
+### Manual Deployment
+
+If you want to build and deploy manually:
+
+```bash
+npm run build
+```
+
+The static files will be generated in the `out/` directory. You can then deploy these files to any static hosting service.
+
+### Using a Custom Domain
+
+If you want to use a custom domain:
+1. Remove or modify the `basePath` in `next.config.js`
+2. Update your GitHub Pages settings with your custom domain
+3. Add a `CNAME` file in the `public/` folder with your domain name
+
 ## License
 
 This is a replica project for development purposes.
