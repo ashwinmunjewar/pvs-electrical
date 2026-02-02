@@ -207,12 +207,12 @@ export default function Hero() {
         <Slider {...sliderSettings}>
           <Slide>
             <HeroContent>
-              <SmallHeading>Welcome to PR Electricals</SmallHeading>
+              <SmallHeading>Welcome to P.S.V Electricals</SmallHeading>
               <HeroTitle>
-                PR Electricals – Powering a Greener Future with <span>Solar Energy.</span>
+                P.S.V Electricals – Powering a Greener Future with <span>Solar Energy.</span>
               </HeroTitle>
               <HeroSubtitle>
-                <strong>PR ELECTRICALS</strong> Power your world with smart solar. From custom design to expert installation and ongoing care, we make going solar effortless—and worth it.
+                <strong>P.S.V ELECTRICALS</strong> Power your world with smart solar. From custom design to expert installation and ongoing care, we make going solar effortless—and worth it.
               </HeroSubtitle>
               <HeroCTA>
                 <strong>Join the Solar Revolution — Save on Electricity, Reduce Your Carbon Footprint, and Generate Your Own Power!</strong>

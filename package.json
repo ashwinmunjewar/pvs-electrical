@@ -1,7 +1,7 @@
 {
   "name": "crw-enterprise-mockup",
   "version": "1.0.0",
-  "description": "PR Electricals website built with Next.js and styled-components",
+  "description": "P.S.V Electricals website built with Next.js and styled-components",
   "private": true,
   "scripts": {
     "dev": "next dev",

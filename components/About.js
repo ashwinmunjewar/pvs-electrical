@@ -159,7 +159,7 @@ export default function About() {
           <AboutImage>
             <img 
               src="https://crwenterprise.in/wp-content/uploads/2024/03/about-2.jpg" 
-              alt="About PR Electricals" 
+              alt="About P.S.V Electricals" 
             />
           </AboutImage>
           <AboutImage>
@@ -171,10 +171,10 @@ export default function About() {
         </ImageContainer>
         <ContentContainer>
           <h3>About us</h3>
-          <h2>About PR Electricals</h2>
+          <h2>About P.S.V Electricals</h2>
           <AboutText>
             <p>
-              PR Electricals, established in <strong>2020</strong> and headquartered in <strong>Wardha-Nagpur</strong><strong>, Maharashtra</strong>, is a leading solar energy provider in India offering premium solar solutions for residential, commercial, and government projects. We are committed to sustainability, innovation, and customer success.
+              P.S.V Electricals, established in <strong>2020</strong> and headquartered in <strong>Wardha-Nagpur</strong><strong>, Maharashtra</strong>, is a leading solar energy provider in India offering premium solar solutions for residential, commercial, and government projects. We are committed to sustainability, innovation, and customer success.
             </p>
             <p>Our expertise includes:</p>
             <ul>

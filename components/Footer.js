@@ -99,7 +99,7 @@ export default function Footer() {
     <FooterContainer>
       <FooterContent>
         <FooterSection>
-          <h3>PR Electricals</h3>
+          <h3>P.S.V Electricals</h3>
           <p>
             Powering Sustainability, Building Excellence. Leading solar energy provider in India offering premium solar solutions for residential, commercial, and government projects.
           </p>
@@ -142,21 +142,25 @@ export default function Footer() {
         <FooterSection>
           <h3>Contact Info</h3>
           <p>
-            <i className="fas fa-map-marker-alt" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
-            Wardha-Nagpur, Maharashtra
-          </p>
-          <p>
-            <i className="fas fa-phone-alt" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
-            9765712208
-          </p>
-          <p>
             <i className="fas fa-envelope" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
-            crwenterprise.in
+            parantak8600@gmail.com
+          </p>
+          <p>
+            <i className="fas fa-user" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
+            Parantak N. Raut: 9765712208
+          </p>
+          <p>
+            <i className="fas fa-user" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
+            Abhijeet S. Nakhale: 9595654794
+          </p>
+          <p>
+            <i className="fas fa-map-marker-alt" style={{ marginRight: '0.5rem', color: '#4A90E2' }}></i>
+            Lahri Nagar Murarka Layout, Oppo Maa Vaishnavi Complex No 05, Wardha 442001
           </p>
         </FooterSection>
       </FooterContent>
       <FooterBottom>
-        <p>&copy; {currentYear} PR Electricals. All rights reserved. | Powering Sustainability, Building Excellence</p>
+        <p>&copy; {currentYear} P.S.V Electricals. All rights reserved. | Powering Sustainability, Building Excellence</p>
       </FooterBottom>
     </FooterContainer>
   );

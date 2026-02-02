@@ -26,10 +26,14 @@ const Logo = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
   
-  img {
+  img, svg {
     height: 52px;
     width: auto;
+    color: ${props => props.scrolled ? '#333' : '#fff'};
+    transition: color 0.3s ease;
   }
 `;
 
@@ -107,8 +111,8 @@ export default function Header() {
       <Nav>
         <Logo scrolled={scrolled}>
           <img 
-            src="https://crwenterprise.in/wp-content/uploads/2024/03/CRW-Logo.png" 
-            alt="PR Electricals Logo" 
+            src="/images/logo.svg" 
+            alt="CR Enterprise Logo" 
           />
         </Logo>
         <NavLinks menuOpen={menuOpen}>

@@ -1,6 +1,6 @@
-# PR Electricals Website
+# P.S.V Electricals Website
 
-PR Electricals website built with Next.js and styled-components. A modern, professional solar energy solutions website.
+P.S.V Electricals website built with Next.js and styled-components. A modern, professional solar energy solutions website.
 
 ## Features
 

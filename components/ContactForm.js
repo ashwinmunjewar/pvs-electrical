@@ -292,21 +292,28 @@ export default function ContactForm() {
               <i className="fas fa-envelope"></i>
               <div>
                 <strong>Email</strong>
-                <span>prelectricals.in</span>
+                <span>parantak8600@gmail.com</span>
               </div>
             </InfoItem>
             <InfoItem>
-              <i className="fas fa-phone-alt"></i>
+              <i className="fas fa-user"></i>
               <div>
-                <strong>Phone</strong>
-                <span>9765712208</span>
+                <strong>Parantak N. Raut</strong>
+                <span>Contact No: 9765712208</span>
+              </div>
+            </InfoItem>
+            <InfoItem>
+              <i className="fas fa-user"></i>
+              <div>
+                <strong>Abhijeet S. Nakhale</strong>
+                <span>Contact No: 9595654794</span>
               </div>
             </InfoItem>
             <InfoItem>
               <i className="fas fa-map-marker-alt"></i>
               <div>
-                <strong>Location</strong>
-                <span>Wardha-Nagpur, Maharashtra, India</span>
+                <strong>Office Address</strong>
+                <span>Lahri Nagar Murarka Layout Oppo Maa Vaishnavi Complex No 05 Wardha 442001</span>
               </div>
             </InfoItem>
           </ContactInfo>
@@ -365,11 +372,14 @@ export default function ContactForm() {
       
       <CTASection>
         <CTAContent>
-          <h2>Have Questions?<span> Call Us 976-571-2208</span></h2>
+          <h2>Have Questions?<span> Call Us</span></h2>
           <p>
             Our team is ready to help you with all your solar energy needs. Whether it's choosing the right system, understanding costs, or getting assistance with installation and subsidies, we're just a call away.
           </p>
-          <PhoneButton href="tel:9765712208">Call Now</PhoneButton>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <PhoneButton href="tel:9765712208">Call Parantak: 976-571-2208</PhoneButton>
+            <PhoneButton href="tel:9595654794">Call Abhijeet: 959-565-4794</PhoneButton>
+          </div>
         </CTAContent>
       </CTASection>
     </>
