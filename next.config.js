@@ -4,19 +4,19 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  output: 'export',
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'crwenterprise.in',
         pathname: '/wp-content/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/pvs-electrical' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/pvs-electrical' : '',
 }
 
 module.exports = nextConfig
