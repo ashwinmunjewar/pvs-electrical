@@ -351,7 +351,7 @@ export default function ContactForm() {
         <ContactContainer>
           <ContactInfo>
             <h3>Contact Information</h3>
-            <p>Expert guidance on solar systems, pricing, subsidies &amp; installation \u2014 one call away.</p>
+            <p>Expert guidance on solar systems, pricing, subsidies &amp; installation &mdash; one call away.</p>
             <InfoItem>
               <i className="fas fa-envelope"></i>
               <div>
