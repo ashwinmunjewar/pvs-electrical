@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -99,19 +100,23 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const router = useRouter();
+
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
+    setMenuOpen(false);
     const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push(`/#${targetId}`);
     }
-    setMenuOpen(false);
   };
 
   return (
     <HeaderContainer scrolled={scrolled}>
       <Nav>
-        <Logo scrolled={scrolled}>
+        <Logo scrolled={scrolled} onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
           <img 
             src="/images/logo.svg" 
             alt="CR Enterprise Logo" 
