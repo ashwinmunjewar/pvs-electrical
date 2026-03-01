@@ -374,7 +374,7 @@ export default function ContactForm() {
         <CTAContent>
           <h2>Have Questions?<span> Call Us</span></h2>
           <p>
-            Our team is ready to help you with all your solar energy needs. Whether it's choosing the right system, understanding costs, or getting assistance with installation and subsidies, we're just a call away.
+            Ready to make the switch to solar? Our experts are available to discuss your energy needs, help you choose the right system, and guide you through every step of the process.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <PhoneButton href="tel:9765712208">Call Parantak: 976-571-2208</PhoneButton>
