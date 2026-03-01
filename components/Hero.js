@@ -255,7 +255,7 @@ const sliderSettings = {
 const heroSlides = [
   {
     heading: 'Welcome to P.S V Electricals',
-    title: 'Transform Your Home with <span>Residential Solar Power</span>',
+    titleParts: ['Transform Your Home with ', 'Residential Solar Power'],
     subtitle:
       'Experience energy independence with custom-designed solar rooftop systems. Cut electricity bills by up to 90% while contributing to a sustainable future.',
     features: 'Premium Quality Panels \u00B7 Expert Installation \u00B7 25-Year Warranty \u00B7 Subsidy Assistance',
@@ -266,7 +266,7 @@ const heroSlides = [
   },
   {
     heading: 'Commercial Solar Experts',
-    title: 'Power Your Business with <span>Smart Solar Solutions</span>',
+    titleParts: ['Power Your Business with ', 'Smart Solar Solutions'],
     subtitle:
       'Reduce operational costs and enhance your corporate sustainability. Our scalable solar systems for offices, factories, and industrial facilities deliver exceptional ROI.',
     features: 'Lower Energy Costs \u00B7 Tax Benefits \u00B7 Reduce Carbon Footprint \u00B7 Reliable Power Supply',
@@ -277,7 +277,7 @@ const heroSlides = [
   },
   {
     heading: 'Join the Solar Revolution',
-    title: 'Save Money While <span>Saving the Planet</span>',
+    titleParts: ['Save Money While ', 'Saving the Planet'],
     subtitle:
       'Generate your own clean energy and watch your electricity bills drop. With flexible financing options and government subsidies, solar has never been more affordable.',
     features: 'Zero Down Payment Options \u00B7 Government Subsidies \u00B7 Quick Installation \u00B7 24/7 Support',
@@ -328,7 +328,7 @@ export default function Hero() {
             <Slide key={slide.heading} bgImage={slide.bgImage}>
               <HeroContent>
                 <SmallHeading>{slide.heading}</SmallHeading>
-                <HeroTitle dangerouslySetInnerHTML={{ __html: slide.title }} />
+                <HeroTitle>{slide.titleParts[0]}<span>{slide.titleParts[1]}</span></HeroTitle>
                 <HeroSubtitle>{slide.subtitle}</HeroSubtitle>
                 <FeaturesBox>{slide.features}</FeaturesBox>
                 <ButtonGroup>

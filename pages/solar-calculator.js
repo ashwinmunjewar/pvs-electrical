@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -306,17 +306,18 @@ export default function SolarCalculator() {
   const [loading, setLoading] = useState(false);
   const [emiTenure, setEmiTenure] = useState(60);
   const resultsRef = useRef(null);
+  const debounceRef = useRef(null);
 
   const pct = ((bill - MIN_BILL) / (MAX_BILL - MIN_BILL)) * 100;
 
-  const handlePincodeBlur = useCallback(async () => {
-    if (!/^\d{6}$/.test(pincode)) {
+  const fetchLocation = useCallback(async (pin) => {
+    if (!/^\d{6}$/.test(pin)) {
       setLocation(null);
-      setLocError(pincode.length ? 'Enter a valid 6-digit pincode' : '');
+      setLocError(pin.length ? 'Enter a valid 6-digit pincode' : '');
       return;
     }
     setLocError('');
-    const loc = await lookupPincode(pincode);
+    const loc = await lookupPincode(pin);
     if (loc.found) {
       setLocation(loc);
       setLocError('');
@@ -324,7 +325,18 @@ export default function SolarCalculator() {
       setLocation(null);
       setLocError('Could not find this pincode. Try another.');
     }
-  }, [pincode]);
+  }, []);
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (/^\d{6}$/.test(pincode)) {
+      debounceRef.current = setTimeout(() => fetchLocation(pincode), 400);
+    } else {
+      setLocation(null);
+      if (pincode.length > 0 && pincode.length < 6) setLocError('');
+    }
+    return () => clearTimeout(debounceRef.current);
+  }, [pincode, fetchLocation]);
 
   const handleCalculate = async () => {
     if (!/^\d{6}$/.test(pincode)) {
@@ -369,8 +381,7 @@ export default function SolarCalculator() {
                   maxLength={6}
                   placeholder="e.g. 442001"
                   value={pincode}
-                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, ''))}
-                  onBlur={handlePincodeBlur}
+                  onChange={(e) => setPincode(e.target.value.replace(/\D/g, '').slice(0, 6))}
                 />
                 {location && (
                   <LocationTag>{location.city}, {location.state}</LocationTag>

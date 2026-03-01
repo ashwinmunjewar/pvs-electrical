@@ -288,7 +288,9 @@ const billRanges = [
   'More than \u20B98000',
 ];
 
-const WEB3FORMS_KEY = 'ef6339fc-773c-442d-9226-0b6ed80f3b8e';
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '';
+
+const COOLDOWN_MS = 30000;
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -297,18 +299,46 @@ export default function ContactForm() {
     pincode: '',
     monthlyBill: '',
   });
+  const [botField, setBotField] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [cooldown, setCooldown] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validate = () => {
+    const name = formData.name.trim();
+    if (name.length < 2 || name.length > 100) {
+      setError('Please enter a valid name (2\u2013100 characters).');
+      return false;
+    }
+    if (!/^\d{10}$/.test(formData.whatsapp)) {
+      setError('Please enter a valid 10-digit WhatsApp number.');
+      return false;
+    }
+    if (!/^\d{6}$/.test(formData.pincode)) {
+      setError('Please enter a valid 6-digit pin code.');
+      return false;
+    }
+    if (!formData.monthlyBill) {
+      setError('Please select your average monthly bill.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
+
+    if (botField) return;
+    if (cooldown) { setError('Please wait before submitting again.'); return; }
+    if (!validate()) return;
+
+    setLoading(true);
 
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -316,12 +346,13 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `New solar enquiry from ${formData.name} \u2014 P.S.V Electricals`,
+          botcheck: '',
+          subject: `New solar enquiry from ${formData.name.trim()} \u2014 P.S.V Electricals`,
           from_name: 'P.S.V Electricals Website',
-          name: formData.name,
+          name: formData.name.trim(),
           whatsapp: formData.whatsapp,
           pincode: formData.pincode,
-          monthly_bill: formData.monthlyBill || 'Not selected',
+          monthly_bill: formData.monthlyBill,
         }),
       });
 
@@ -330,9 +361,11 @@ export default function ContactForm() {
       if (data.success) {
         setSubmitted(true);
         setFormData({ name: '', whatsapp: '', pincode: '', monthlyBill: '' });
+        setCooldown(true);
         setTimeout(() => setSubmitted(false), 5000);
+        setTimeout(() => setCooldown(false), COOLDOWN_MS);
       } else {
-        setError(data.message || 'Something went wrong. Please try again.');
+        setError('Something went wrong. Please try again.');
       }
     } catch {
       setError('Network error. Please check your connection and try again.');
@@ -382,6 +415,16 @@ export default function ContactForm() {
             </InfoItem>
           </ContactInfo>
           <Form onSubmit={handleSubmit}>
+            {/* Honeypot - hidden from humans, bots fill it and get rejected */}
+            <input
+              type="text"
+              name="botcheck"
+              value={botField}
+              onChange={(e) => setBotField(e.target.value)}
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
             <FormGroup>
               <Label>Full name <span>*</span></Label>
               <Input
@@ -391,6 +434,9 @@ export default function ContactForm() {
                 value={formData.name}
                 onChange={handleChange}
                 required
+                minLength={2}
+                maxLength={100}
+                autoComplete="name"
               />
             </FormGroup>
             <FormGroup>
@@ -400,8 +446,12 @@ export default function ContactForm() {
                 name="whatsapp"
                 placeholder="Enter WhatsApp Number"
                 value={formData.whatsapp}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, whatsapp: e.target.value.replace(/\D/g, '').slice(0, 10) })}
                 required
+                maxLength={10}
+                inputMode="numeric"
+                pattern="[0-9]{10}"
+                autoComplete="tel"
               />
             </FormGroup>
             <FormGroup>
@@ -433,8 +483,8 @@ export default function ContactForm() {
                 ))}
               </BillOptions>
             </div>
-            <SubmitButton type="submit" disabled={loading || !formData.monthlyBill}>
-              {loading ? 'Sending...' : 'Get a FREE Quote'}
+            <SubmitButton type="submit" disabled={loading || cooldown || !formData.monthlyBill}>
+              {loading ? 'Sending...' : cooldown ? 'Please wait...' : 'Get a FREE Quote'}
             </SubmitButton>
             {submitted && (
               <SuccessMessage>
