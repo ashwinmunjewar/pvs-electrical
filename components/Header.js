@@ -71,6 +71,10 @@ const NavLink = styled.li`
     &:hover {
       color: #4A90E2;
     }
+
+    @media (max-width: 768px) {
+      color: #333;
+    }
   }
 `;
 
