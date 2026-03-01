@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import Slider from 'react-slick';
+import Link from 'next/link';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -295,9 +296,28 @@ export default function Hero() {
   };
 
   const secondaryTargets = {
-    'Calculate Savings': 'contact',
     'Our Services': 'services',
     'Why Choose Us': 'why-choose-us',
+  };
+
+  const renderSecondaryButton = (label) => {
+    if (label === 'Calculate Savings') {
+      return (
+        <Link href="/solar-calculator" passHref legacyBehavior>
+          <CTAButton className="secondary">{label}</CTAButton>
+        </Link>
+      );
+    }
+    const target = secondaryTargets[label] || 'contact';
+    return (
+      <CTAButton
+        href={`#${target}`}
+        onClick={(e) => scrollTo(e, target)}
+        className="secondary"
+      >
+        {label}
+      </CTAButton>
+    );
   };
 
   return (
@@ -315,13 +335,7 @@ export default function Hero() {
                   <CTAButton href="#contact" onClick={(e) => scrollTo(e, 'contact')}>
                     {slide.primaryButton}
                   </CTAButton>
-                  <CTAButton
-                    href={`#${secondaryTargets[slide.secondaryButton] || 'contact'}`}
-                    onClick={(e) => scrollTo(e, secondaryTargets[slide.secondaryButton] || 'contact')}
-                    className="secondary"
-                  >
-                    {slide.secondaryButton}
-                  </CTAButton>
+                  {renderSecondaryButton(slide.secondaryButton)}
                 </ButtonGroup>
               </HeroContent>
             </Slide>
