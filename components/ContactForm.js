@@ -145,15 +145,16 @@ const SubmitButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  opacity: ${props => props.disabled ? 0.6 : 1};
 
-  &:hover {
+  &:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
     background-color: #fff;
     color: #000;
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: translateY(0);
   }
 `;
@@ -166,6 +167,16 @@ const SuccessMessage = styled.div`
   margin-top: 1rem;
   text-align: center;
   border: 1px solid #c3e6cb;
+`;
+
+const ErrorMessage = styled.div`
+  padding: 1rem;
+  background-color: #f8d7da;
+  color: #721c24;
+  border-radius: 5px;
+  margin-top: 1rem;
+  text-align: center;
+  border: 1px solid #f5c6cb;
 `;
 
 const CTASection = styled.div`
@@ -242,6 +253,8 @@ const PhoneButton = styled.a`
   }
 `;
 
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -250,6 +263,8 @@ export default function ContactForm() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -258,21 +273,40 @@ export default function ContactForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Form submission handler - can be connected to backend API
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
-    
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 3000);
+    setLoading(true);
+    setError('');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `New enquiry from ${formData.name} — P.S.V Electricals`,
+          from_name: 'P.S.V Electricals Website',
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+          message: formData.message,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        setError(data.message || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -360,11 +394,16 @@ export default function ContactForm() {
                 required
               />
             </FormGroup>
-            <SubmitButton type="submit">Send Message</SubmitButton>
+            <SubmitButton type="submit" disabled={loading}>
+              {loading ? 'Sending...' : 'Send Message'}
+            </SubmitButton>
             {submitted && (
               <SuccessMessage>
-                Thank you! Your message has been sent successfully.
+                Thank you! Your message has been sent successfully. We'll get back to you shortly.
               </SuccessMessage>
+            )}
+            {error && (
+              <ErrorMessage>{error}</ErrorMessage>
             )}
           </Form>
         </ContactContainer>
