@@ -316,8 +316,8 @@ const features = [
     description: 'Reliable solar systems for homes and villas',
     image: 'https://crwenterprise.in/wp-content/uploads/2024/03/whyus-1.jpg',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="63" height="61" viewBox="0 0 63 61" fill="none">
-        <path fillRule="evenodd" clipRule="evenodd" d="M0 33.1351C0 32.9837 0.0374686 32.838 0.106312 32.7087L8.8675 16.2474C8.95177 16.0891 9.08116 15.9584 9.24232 15.8726C9.37482 15.8021 9.5208 15.7661 9.66873 15.7661H36.5046C36.9624 10.9173 41.0499 7.11814 46.0176 7.11814C51.2915 7.11814 55.5733 11.3998 55.5733 16.6738C55.5733 20.9598 52.7451 24.5902 48.855 25.8001L52.629 32.6996C52.7005 32.8303 52.7402 32.9792 52.7402 33.1351V59.1225C52.7402 59.6237 52.3339 60.03 51.8327 60.03H0.907546C0.406321 60.03 0 59.6237 0 59.1225V33.1351Z" fill="#4A90E2"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF">
+        <path d="M19 9.3V4h-3v2.6L12 3 2 12h3v8h5v-6h4v6h5v-8h3l-3-2.7zm-9 .7c0-1.1.9-2 2-2s2 .9 2 2h-4z"/>
       </svg>
     )
   },
@@ -326,8 +326,8 @@ const features = [
     description: 'Cost-saving energy solutions for businesses',
     image: 'https://crwenterprise.in/wp-content/uploads/2024/03/whyus-2.jpg',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="61" viewBox="0 0 51 61" fill="none">
-        <path d="M25 7.5C21.5388 7.5 18.1554 8.52636 15.2775 10.4493C12.3997 12.3722 10.1566 15.1053 8.83212 18.303C7.50758 21.5007 7.16102 25.0194 7.83627 28.4141C8.51151 31.8087 10.1782 34.9269 12.6256 37.3744C15.0731 39.8218 18.1913 41.4885 21.5859 42.1637C24.9806 42.839 28.4993 42.4924 31.697 41.1679C34.8947 39.8434 37.6278 37.6003 39.5507 34.7225C41.4737 31.8446 42.5 28.4612 42.5 25C42.5 20.3587 40.6563 15.9075 37.3744 12.6256C34.0925 9.34374 29.6413 7.5 25 7.5Z" fill="#4A90E2"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF">
+        <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
       </svg>
     )
   },
@@ -336,8 +336,10 @@ const features = [
     description: 'Comprehensive solar solutions for institutions',
     image: 'https://crwenterprise.in/wp-content/uploads/2024/03/whyus-1.jpg',
     icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="51" height="61" viewBox="0 0 51 61" fill="none">
-        <path d="M25 7.5C21.5388 7.5 18.1554 8.52636 15.2775 10.4493C12.3997 12.3722 10.1566 15.1053 8.83212 18.303C7.50758 21.5007 7.16102 25.0194 7.83627 28.4141C8.51151 31.8087 10.1782 34.9269 12.6256 37.3744C15.0731 39.8218 18.1913 41.4885 21.5859 42.1637C24.9806 42.839 28.4993 42.4924 31.697 41.1679C34.8947 39.8434 37.6278 37.6003 39.5507 34.7225C41.4737 31.8446 42.5 28.4612 42.5 25C42.5 20.3587 40.6563 15.9075 37.3744 12.6256C34.0925 9.34374 29.6413 7.5 25 7.5Z" fill="#4A90E2"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF">
+        <path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2zm-1.5 12.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM17 7l0-4h-2.5l0 1.8L12 3l0 0L17 7z"/>
+        <circle cx="6.5" cy="6.5" r="1.5"/>
+        <path d="M11 2.05A10 10 0 0 0 2.05 11h2.02A8 8 0 0 1 11 4.07V2.05zM13 2.05v2.02A8 8 0 0 1 19.93 11h2.02A10 10 0 0 0 13 2.05z"/>
       </svg>
     )
   }
