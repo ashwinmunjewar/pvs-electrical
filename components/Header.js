@@ -32,10 +32,9 @@ const Logo = styled.div`
   color: ${props => props.scrolled ? '#1f2937' : '#ffffff'};
   
   img, svg {
-    height: 52px;
+    height: 62px;
     width: auto;
     transition: filter 0.3s ease;
-    /* Keep white logo on hero, switch to dark logo on white header */
     filter: ${props => props.scrolled ? 'brightness(0) saturate(100%)' : 'none'};
   }
 `;
@@ -62,8 +61,10 @@ const NavLinks = styled.ul`
 
 const NavLink = styled.li`
   a {
-    color: ${props => props.scrolled ? '#333' : '#fff'};
+    color: ${props => props.solid ? '#333' : '#fff'};
     font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
     transition: color 0.3s ease;
     cursor: pointer;
     text-decoration: none;
@@ -74,6 +75,7 @@ const NavLink = styled.li`
 
     @media (max-width: 768px) {
       color: #333;
+      font-size: 1rem;
     }
   }
 `;
@@ -94,6 +96,10 @@ const MenuToggle = styled.button`
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const isHome = router.pathname === '/';
+  const solid = !isHome || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -103,8 +109,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const router = useRouter();
 
   const handleLinkClick = (e, targetId) => {
     e.preventDefault();
@@ -118,32 +122,32 @@ export default function Header() {
   };
 
   return (
-    <HeaderContainer scrolled={scrolled}>
+    <HeaderContainer scrolled={solid}>
       <Nav>
-        <Logo scrolled={scrolled} onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
+        <Logo scrolled={solid} onClick={() => router.push('/')} style={{ cursor: 'pointer' }}>
           <img 
             src="/images/logo.svg" 
-            alt="CR Enterprise Logo" 
+            alt="P.S.V Electricals Logo" 
           />
         </Logo>
         <NavLinks menuOpen={menuOpen}>
-          <NavLink scrolled={scrolled}>
+          <NavLink solid={solid}>
             <a href="#home" onClick={(e) => handleLinkClick(e, 'home')}>Home</a>
           </NavLink>
-          <NavLink scrolled={scrolled}>
+          <NavLink solid={solid}>
             <a href="#about" onClick={(e) => handleLinkClick(e, 'about')}>About</a>
           </NavLink>
-          <NavLink scrolled={scrolled}>
+          <NavLink solid={solid}>
             <a href="#services" onClick={(e) => handleLinkClick(e, 'services')}>Services</a>
           </NavLink>
-          <NavLink scrolled={scrolled}>
+          <NavLink solid={solid}>
             <a href="#why-choose-us" onClick={(e) => handleLinkClick(e, 'why-choose-us')}>Why Choose Us</a>
           </NavLink>
-          <NavLink scrolled={scrolled}>
+          <NavLink solid={solid}>
             <a href="#contact" onClick={(e) => handleLinkClick(e, 'contact')}>Contact</a>
           </NavLink>
         </NavLinks>
-        <MenuToggle scrolled={scrolled} onClick={() => setMenuOpen(!menuOpen)}>
+        <MenuToggle scrolled={solid} onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? '✕' : '☰'}
         </MenuToggle>
       </Nav>
