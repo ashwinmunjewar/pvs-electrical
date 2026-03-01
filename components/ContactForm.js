@@ -11,13 +11,13 @@ const ContactSection = styled.section`
 const SectionTitle = styled.h2`
   font-size: 2.5rem;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   color: #333;
 
   @media (max-width: 768px) {
     font-size: 2rem;
   }
-  
+
   span {
     color: #4A90E2;
   }
@@ -65,13 +65,13 @@ const InfoItem = styled.div`
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  
+
   i {
     color: #4A90E2;
     font-size: 1.2rem;
     margin-top: 0.3rem;
   }
-  
+
   div {
     strong {
       display: block;
@@ -90,68 +90,95 @@ const InfoItem = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 `;
 
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 `;
 
 const Label = styled.label`
   color: #333;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.95rem;
+
+  span {
+    color: #e53e3e;
+  }
 `;
 
 const Input = styled.input`
-  padding: 0.75rem 1rem;
+  padding: 0.8rem 1rem;
   border: 2px solid #e0e0e0;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
   font-family: inherit;
+  background: #fff;
 
   &:focus {
     outline: none;
     border-color: #4A90E2;
   }
+
+  &::placeholder {
+    color: #b0b0b0;
+  }
 `;
 
-const TextArea = styled.textarea`
-  padding: 0.75rem 1rem;
-  border: 2px solid #e0e0e0;
-  border-radius: 5px;
-  font-size: 1rem;
-  min-height: 150px;
-  resize: vertical;
-  transition: border-color 0.3s ease;
+const BillLabel = styled.p`
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0.25rem 0 0.5rem;
+
+  span {
+    color: #e53e3e;
+  }
+`;
+
+const BillOptions = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+`;
+
+const BillChip = styled.button`
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 2px solid ${props => props.selected ? '#4A90E2' : '#e0e0e0'};
+  background: ${props => props.selected ? '#EBF4FF' : '#fff'};
+  color: ${props => props.selected ? '#4A90E2' : '#333'};
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
   font-family: inherit;
 
-  &:focus {
-    outline: none;
+  &:hover {
     border-color: #4A90E2;
   }
 `;
 
 const SubmitButton = styled.button`
   padding: 1rem 2rem;
-  background-color: #4A90E2;
+  background-color: #1a1a5e;
   color: #fff;
-  border: 2px solid #4A90E2;
+  border: none;
   border-radius: 50px;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   opacity: ${props => props.disabled ? 0.6 : 1};
+  margin-top: 0.5rem;
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-    background-color: #fff;
-    color: #000;
+    box-shadow: 0 6px 20px rgba(26, 26, 94, 0.35);
+    background-color: #12124a;
   }
 
   &:active:not(:disabled) {
@@ -163,8 +190,8 @@ const SuccessMessage = styled.div`
   padding: 1rem;
   background-color: #d4edda;
   color: #155724;
-  border-radius: 5px;
-  margin-top: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
   text-align: center;
   border: 1px solid #c3e6cb;
 `;
@@ -173,8 +200,8 @@ const ErrorMessage = styled.div`
   padding: 1rem;
   background-color: #f8d7da;
   color: #721c24;
-  border-radius: 5px;
-  margin-top: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
   text-align: center;
   border: 1px solid #f5c6cb;
 `;
@@ -188,7 +215,7 @@ const CTASection = styled.div`
   margin-top: 4rem;
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -207,21 +234,21 @@ const CTASection = styled.div`
 const CTAContent = styled.div`
   position: relative;
   z-index: 2;
-  
+
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #fff;
-    
+
     span {
       color: #4A90E2;
     }
-    
+
     @media (max-width: 768px) {
       font-size: 2rem;
     }
   }
-  
+
   p {
     font-size: 1.1rem;
     margin-bottom: 2rem;
@@ -253,24 +280,29 @@ const PhoneButton = styled.a`
   }
 `;
 
+const billRanges = [
+  'Less than \u20B91500',
+  '\u20B91500 \u2013 \u20B92500',
+  '\u20B92500 \u2013 \u20B94000',
+  '\u20B94000 \u2013 \u20B98000',
+  'More than \u20B98000',
+];
+
 const WEB3FORMS_KEY = 'ef6339fc-773c-442d-9226-0b6ed80f3b8e';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    phone: '',
-    message: ''
+    whatsapp: '',
+    pincode: '',
+    monthlyBill: '',
   });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -284,12 +316,12 @@ export default function ContactForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `New enquiry from ${formData.name} — P.S.V Electricals`,
+          subject: `New solar enquiry from ${formData.name} \u2014 P.S.V Electricals`,
           from_name: 'P.S.V Electricals Website',
           name: formData.name,
-          email: formData.email,
-          phone: formData.phone || 'Not provided',
-          message: formData.message,
+          whatsapp: formData.whatsapp,
+          pincode: formData.pincode,
+          monthly_bill: formData.monthlyBill || 'Not selected',
         }),
       });
 
@@ -297,7 +329,7 @@ export default function ContactForm() {
 
       if (data.success) {
         setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', message: '' });
+        setFormData({ name: '', whatsapp: '', pincode: '', monthlyBill: '' });
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         setError(data.message || 'Something went wrong. Please try again.');
@@ -312,16 +344,14 @@ export default function ContactForm() {
   return (
     <>
       <ContactSection id="contact">
-        <SectionTitle>Get In Touch</SectionTitle>
+        <SectionTitle>Book a <span>FREE</span> Solar Consultation</SectionTitle>
         <SectionSubtitle>
-          Have a question or want to work together? We'd love to hear from you.
+          And save up to &#8377;78,000 with subsidy
         </SectionSubtitle>
         <ContactContainer>
           <ContactInfo>
             <h3>Contact Information</h3>
-            <p>
-              Our team is ready to help you with all your solar energy needs. Whether it's choosing the right system, understanding costs, or getting assistance with installation and subsidies, we're just a call away.
-            </p>
+            <p>Expert guidance on solar systems, pricing, subsidies &amp; installation \u2014 one call away.</p>
             <InfoItem>
               <i className="fas fa-envelope"></i>
               <div>
@@ -353,53 +383,62 @@ export default function ContactForm() {
           </ContactInfo>
           <Form onSubmit={handleSubmit}>
             <FormGroup>
-              <Label htmlFor="name">Name *</Label>
+              <Label>Full name <span>*</span></Label>
               <Input
                 type="text"
-                id="name"
                 name="name"
+                placeholder="Enter Full Name"
                 value={formData.name}
                 onChange={handleChange}
                 required
               />
             </FormGroup>
             <FormGroup>
-              <Label htmlFor="email">Email *</Label>
-              <Input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="phone">Phone</Label>
+              <Label>WhatsApp number <span>*</span></Label>
               <Input
                 type="tel"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label htmlFor="message">Message *</Label>
-              <TextArea
-                id="message"
-                name="message"
-                value={formData.message}
+                name="whatsapp"
+                placeholder="Enter WhatsApp Number"
+                value={formData.whatsapp}
                 onChange={handleChange}
                 required
               />
             </FormGroup>
-            <SubmitButton type="submit" disabled={loading}>
-              {loading ? 'Sending...' : 'Send Message'}
+            <FormGroup>
+              <Label>Pin code <span>*</span></Label>
+              <Input
+                type="text"
+                name="pincode"
+                placeholder="Enter Pincode"
+                value={formData.pincode}
+                onChange={handleChange}
+                required
+                maxLength={6}
+                inputMode="numeric"
+                pattern="[0-9]{6}"
+              />
+            </FormGroup>
+            <div>
+              <BillLabel>What is your average monthly bill? <span>*</span></BillLabel>
+              <BillOptions>
+                {billRanges.map((range) => (
+                  <BillChip
+                    key={range}
+                    type="button"
+                    selected={formData.monthlyBill === range}
+                    onClick={() => setFormData({ ...formData, monthlyBill: range })}
+                  >
+                    {range}
+                  </BillChip>
+                ))}
+              </BillOptions>
+            </div>
+            <SubmitButton type="submit" disabled={loading || !formData.monthlyBill}>
+              {loading ? 'Sending...' : 'Get a FREE Quote'}
             </SubmitButton>
             {submitted && (
               <SuccessMessage>
-                Thank you! Your message has been sent successfully. We'll get back to you shortly.
+                Thank you! We'll reach out on WhatsApp shortly with your free quote.
               </SuccessMessage>
             )}
             {error && (
@@ -408,7 +447,7 @@ export default function ContactForm() {
           </Form>
         </ContactContainer>
       </ContactSection>
-      
+
       <CTASection>
         <CTAContent>
           <h2>Have Questions?<span> Call Us</span></h2>
