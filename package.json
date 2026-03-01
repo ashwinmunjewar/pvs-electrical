@@ -8,21 +8,27 @@
     "build": "next build",
     "export": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "tunnel": "node scripts/tunnel-ngrok.js",
+    "dummy-site": "./scripts/dummy-site.sh",
+    "kill_ngrok": "./scripts/kill_ngrok.sh",
+    "fix_ngrok": "./scripts/fix_ngrok.sh"
   },
   "dependencies": {
     "next": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^6.1.0",
     "react-slick": "^0.30.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.0"
   },
   "devDependencies": {
+    "@ngrok/ngrok": "^1.7.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "eslint": "^8.0.0",
-    "eslint-config-next": "^14.0.0"
+    "eslint-config-next": "^14.0.0",
+    "localtunnel": "^2.0.2"
   }
 }

@@ -174,7 +174,7 @@ export default function About() {
           <h2>About P.S.V Electricals</h2>
           <AboutText>
             <p>
-              P.S.V Electricals, established in <strong>2020</strong> and headquartered in <strong>Wardha-Nagpur</strong><strong>, Maharashtra</strong>, is a leading solar energy provider in India offering premium solar solutions for residential, commercial, and government projects. We are committed to sustainability, innovation, and customer success.
+              P.S.V Electricals, established in <strong>2025</strong> and headquartered in <strong>Wardha-Nagpur</strong><strong>, Maharashtra</strong>, is a leading solar energy provider in India offering premium solar solutions for residential, commercial, and government projects. We are committed to sustainability, innovation, and customer success.
             </p>
             <p>Our expertise includes:</p>
             <ul>

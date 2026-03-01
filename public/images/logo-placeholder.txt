@@ -1,2 +1,0 @@
-Please add your logo file here as logo.png
-The logo should be in PNG format and will be displayed in the header.
