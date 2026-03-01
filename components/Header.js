@@ -28,12 +28,14 @@ const Logo = styled.div`
   transition: opacity 0.3s ease;
   display: flex;
   align-items: center;
+  color: ${props => props.scrolled ? '#1f2937' : '#ffffff'};
   
   img, svg {
     height: 52px;
     width: auto;
-    color: ${props => props.scrolled ? '#333' : '#fff'};
-    transition: color 0.3s ease;
+    transition: filter 0.3s ease;
+    /* Keep white logo on hero, switch to dark logo on white header */
+    filter: ${props => props.scrolled ? 'brightness(0) saturate(100%)' : 'none'};
   }
 `;
 
