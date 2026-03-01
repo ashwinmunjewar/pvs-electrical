@@ -330,18 +330,6 @@ const features = [
         <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
       </svg>
     )
-  },
-  {
-    title: 'Government & Large Scale Projects',
-    description: 'Comprehensive solar solutions for institutions',
-    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/whyus-1.jpg',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF">
-        <path d="M12 2L1 12h3v9h6v-6h4v6h6v-9h3L12 2zm-1.5 12.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM17 7l0-4h-2.5l0 1.8L12 3l0 0L17 7z"/>
-        <circle cx="6.5" cy="6.5" r="1.5"/>
-        <path d="M11 2.05A10 10 0 0 0 2.05 11h2.02A8 8 0 0 1 11 4.07V2.05zM13 2.05v2.02A8 8 0 0 1 19.93 11h2.02A10 10 0 0 0 13 2.05z"/>
-      </svg>
-    )
   }
 ];
 

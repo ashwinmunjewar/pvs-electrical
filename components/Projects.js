@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const ProjectsSection = styled.section`
   padding: 5rem 2rem;
@@ -109,23 +110,21 @@ const projects = [
   {
     title: 'Photon Fusion',
     description: 'Advanced solar energy project showcasing innovative residential solutions.',
-    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-1.jpg'
+    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-1.jpg',
+    slug: 'photon-fusion',
   },
   {
     title: 'LuxSolar Dynamics',
     description: 'Commercial solar installation delivering significant energy cost savings.',
-    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-2.jpg'
+    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-2.jpg',
+    slug: 'luxsolar-dynamics',
   },
   {
     title: 'Solarburst Ventures',
     description: 'Large-scale industrial solar project with hybrid battery integration.',
-    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-3.jpg'
+    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-3.jpg',
+    slug: 'solarburst-ventures',
   },
-  {
-    title: 'Sunworks Initiative',
-    description: 'Government project demonstrating sustainable energy solutions.',
-    image: 'https://crwenterprise.in/wp-content/uploads/2024/03/service-4.jpg'
-  }
 ];
 
 export default function Projects() {
@@ -137,18 +136,20 @@ export default function Projects() {
       </SectionSubtitle>
       <ProjectsGrid>
         {projects.map((project, index) => (
-          <ProjectCard key={index}>
-            <ProjectImage>
-              <img src={project.image} alt={project.title} />
-              <ProjectOverlay className="project-overlay">
-                View Details
-              </ProjectOverlay>
-            </ProjectImage>
-            <ProjectInfo>
-              <ProjectTitle>{project.title}</ProjectTitle>
-              <ProjectDescription>{project.description}</ProjectDescription>
-            </ProjectInfo>
-          </ProjectCard>
+          <Link href={`/projects/${project.slug}`} key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <ProjectCard>
+              <ProjectImage>
+                <img src={project.image} alt={project.title} />
+                <ProjectOverlay className="project-overlay">
+                  View Details
+                </ProjectOverlay>
+              </ProjectImage>
+              <ProjectInfo>
+                <ProjectTitle>{project.title}</ProjectTitle>
+                <ProjectDescription>{project.description}</ProjectDescription>
+              </ProjectInfo>
+            </ProjectCard>
+          </Link>
         ))}
       </ProjectsGrid>
     </ProjectsSection>
