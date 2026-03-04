@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components';
+import { useState } from 'react';
 import Slider from 'react-slick';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -173,6 +175,89 @@ const FeaturesBox = styled.div`
   }
 `;
 
+const TeaserCard = styled.div`
+  max-width: 560px;
+  margin: 1.2rem auto 0;
+  padding: 1rem;
+  border-radius: 14px;
+  background: rgba(4, 21, 46, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+`;
+
+const TeaserTitle = styled.p`
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #d8efff;
+  letter-spacing: 0.2px;
+`;
+
+const TeaserTrustLine = styled.p`
+  margin: -0.35rem 0 0.8rem;
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.88);
+`;
+
+const TeaserRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.7rem;
+
+  @media (max-width: 520px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const TeaserInputWrap = styled.div`
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0 0.9rem;
+`;
+
+const Rupee = styled.span`
+  color: #fff;
+  font-size: 1rem;
+  margin-right: 0.4rem;
+  opacity: 0.9;
+`;
+
+const TeaserInput = styled.input`
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 0.98rem;
+  padding: 0.72rem 0;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+  }
+`;
+
+const TeaserButton = styled.button`
+  border: 0;
+  border-radius: 999px;
+  padding: 0.72rem 1.2rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(34, 197, 94, 0.35);
+    background: linear-gradient(135deg, #2ecf67 0%, #1dae51 100%);
+  }
+`;
+
 const ButtonGroup = styled.div`
   display: flex;
   gap: 1.5rem;
@@ -180,6 +265,9 @@ const ButtonGroup = styled.div`
   margin-top: 2rem;
   flex-wrap: wrap;
 `;
+
+const MIN_BILL = 500;
+const MAX_BILL = 15000;
 
 const CTAButton = styled.a`
   display: inline-block;
@@ -289,10 +377,30 @@ const heroSlides = [
 ];
 
 export default function Hero() {
+  const router = useRouter();
+  const [teaserBill, setTeaserBill] = useState('3000');
+
   const scrollTo = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleTeaserBillChange = (e) => {
+    setTeaserBill(e.target.value.replace(/\D/g, '').slice(0, 6));
+  };
+
+  const openCalculator = () => {
+    const parsedBill = Number(teaserBill);
+    const validBill = Number.isFinite(parsedBill) && parsedBill >= MIN_BILL && parsedBill <= MAX_BILL
+      ? parsedBill
+      : 3000;
+    router.push(`/solar-calculator?bill=${validBill}`);
+  };
+
+  const handleTeaserSubmit = (e) => {
+    e.preventDefault();
+    openCalculator();
   };
 
   const secondaryTargets = {
@@ -331,6 +439,27 @@ export default function Hero() {
                 <HeroTitle>{slide.titleParts[0]}<span>{slide.titleParts[1]}</span></HeroTitle>
                 <HeroSubtitle>{slide.subtitle}</HeroSubtitle>
                 <FeaturesBox>{slide.features}</FeaturesBox>
+                <TeaserCard>
+                  <TeaserTitle>Know your solar savings in 10 seconds</TeaserTitle>
+                  <TeaserTrustLine>Just call us. We handle permits, subsidy paperwork, and installation.</TeaserTrustLine>
+                  <form onSubmit={handleTeaserSubmit}>
+                    <TeaserRow>
+                      <TeaserInputWrap>
+                        <Rupee>&#8377;</Rupee>
+                        <TeaserInput
+                          type="text"
+                          inputMode="numeric"
+                          maxLength={6}
+                          value={teaserBill}
+                          onChange={handleTeaserBillChange}
+                          placeholder="Enter monthly electricity bill"
+                          aria-label="Monthly electricity bill amount"
+                        />
+                      </TeaserInputWrap>
+                      <TeaserButton type="submit">Calculate Savings</TeaserButton>
+                    </TeaserRow>
+                  </form>
+                </TeaserCard>
                 <ButtonGroup>
                   <CTAButton href="#contact" onClick={(e) => scrollTo(e, 'contact')}>
                     {slide.primaryButton}

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {
@@ -298,6 +299,7 @@ const MAX_BILL = 15000;
 const STEP = 100;
 
 export default function SolarCalculator() {
+  const router = useRouter();
   const [pincode, setPincode] = useState('');
   const [bill, setBill] = useState(3000);
   const [location, setLocation] = useState(null);
@@ -307,6 +309,7 @@ export default function SolarCalculator() {
   const [emiTenure, setEmiTenure] = useState(60);
   const resultsRef = useRef(null);
   const debounceRef = useRef(null);
+  const queryAppliedRef = useRef(false);
 
   const pct = ((bill - MIN_BILL) / (MAX_BILL - MIN_BILL)) * 100;
 
@@ -337,6 +340,21 @@ export default function SolarCalculator() {
     }
     return () => clearTimeout(debounceRef.current);
   }, [pincode, fetchLocation]);
+
+  useEffect(() => {
+    if (!router.isReady || queryAppliedRef.current) return;
+
+    const { bill: billFromQuery } = router.query;
+    const rawBill = Array.isArray(billFromQuery) ? billFromQuery[0] : billFromQuery;
+    const parsedBill = Number(rawBill);
+
+    if (Number.isFinite(parsedBill)) {
+      const safeBill = Math.min(MAX_BILL, Math.max(MIN_BILL, parsedBill));
+      setBill(safeBill);
+    }
+
+    queryAppliedRef.current = true;
+  }, [router.isReady, router.query]);
 
   const handleCalculate = async () => {
     if (!/^\d{6}$/.test(pincode)) {

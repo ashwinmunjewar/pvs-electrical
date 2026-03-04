@@ -384,7 +384,7 @@ export default function ContactForm() {
         <ContactContainer>
           <ContactInfo>
             <h3>Contact Information</h3>
-            <p>Expert guidance on solar systems, pricing, subsidies &amp; installation &mdash; one call away.</p>
+            <p>Just call us. We handle permits, subsidy paperwork, and installation &mdash; start to finish.</p>
             <InfoItem>
               <i className="fas fa-envelope"></i>
               <div>
@@ -502,7 +502,7 @@ export default function ContactForm() {
         <CTAContent>
           <h2>Have Questions?<span> Call Us</span></h2>
           <p>
-            Ready to make the switch to solar? Our experts are available to discuss your energy needs, help you choose the right system, and guide you through every step of the process.
+            Switching to solar should feel simple. Our team helps you choose the right system and handles permits, subsidy paperwork, and installation for you.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <PhoneButton href="tel:9765712208">Call Parantak: 976-571-2208</PhoneButton>

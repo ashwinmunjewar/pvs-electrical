@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import GlobalStyle from '../styles/GlobalStyle';
+import WhatsAppFloat from '../components/WhatsAppFloat';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
@@ -14,6 +15,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Component {...pageProps} />
+      <WhatsAppFloat />
     </>
   );
 }
